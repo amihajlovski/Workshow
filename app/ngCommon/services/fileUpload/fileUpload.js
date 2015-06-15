@@ -41,8 +41,8 @@
                                 'Size': SelectedFile[fileBox.id].size,
                                 'type':data['type'],
                                 'keepInTemp':keepInTemp
-                            }
-                            socket[fileBox.id].emit('Upload', file);
+                            };
+                            socket[fileBox.id].emit('UploadTemp', file);
                         };
                     })(SelectedFile[fileBox.id]);
                     fileReader[fileBox.id].readAsBinaryString(SelectedFile[fileBox.id]);

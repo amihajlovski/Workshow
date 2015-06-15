@@ -323,3 +323,6 @@ p {
     padding-top: 15px;
     background-color: white !important;
 }
+.nobold {
+    font-weight: normal !important;
+}

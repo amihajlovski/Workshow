@@ -16,7 +16,7 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
     /////////////////////////////////////
 
     $scope.initializeUploader = function(fileBoxID, type) {
-        fileBox = document.getElementById(fileBoxID);
+        var fileBox = document.getElementById(fileBoxID);
         fileBox.uploadType = type;
         if (!fileBox.isInitialized) {
             var isTemp = true;
@@ -35,6 +35,7 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
     };
 
     function fileStateHandler (response){
+        console.log('filestatehandler response', response);
         //$scope.performanceCoverImageObject = response;
         //
         //if($scope.performanceCoverImageObject.Status === 'Done'){
