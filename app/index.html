@@ -1,0 +1,97 @@
+<!DOCTYPE>
+<html lang="en" ng-app="graduateApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Workshow</title>
+    <meta name="description" content="Graduation project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="content/images/favico.png">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="configuration/app.css">
+    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog.css">
+    <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css">
+</head>
+<body>
+<toaster-container class="toastPosition"></toaster-container>
+
+<div id="fb-root"></div>
+
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="IndexController">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+                <a href="#/" class="projectName">
+                    Workshow
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                </a>
+                <div class="search navbar-collapse collapse">
+                    <input id="headerSearch" scroll type="text" placeholder="Hey you party animal, searching for an event?"/>
+                </div>
+            </div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse container" aria-expanded="false" style="height: 1px;">
+            <ul class="nav navbar-nav navbar-right" ng-if="loggedUser==null">
+                <li>
+                    <md-button class="loginButton md-raised" ng-click="dialog.open(loginDialogSettings)">join</md-button>
+                </li>
+                <li>
+                    <md-button class="startManagingButton" ng-click="redirectTo('/start-managing')">start managing</md-button>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-if="loggedUser!=null">
+                <li>
+                    <md-button class="createEvent" ng-if="loggedUser.Manager" ng-click="redirectTo('/create-event')">create event</md-button>
+                    <img src="{{avatar}}" class="avatar" ng-click="toggleDropDownMenu()"/>
+                    <span class="userInfo" ng-click="toggleDropDownMenu()">{{loggedUser.Name}}</span>
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-triangle-bottom" style="top: 18px;cursor: pointer;outline: none;" ng-click="toggleDropDownMenu()"></span>
+                </li>
+            </ul>
+            <div ng-show="loggedUser!=null && showDropdownMenu">
+                <ul class="logoutMenu">
+                    <li>Profile</li>
+                    <li class="noBottomBorder" ng-click="logout()">Logout</li>
+                </ul>
+                <span class="glyphicon glyphicon-triangle-top logoutArrow"></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div ng-view></div>
+
+<div ng-include="'ngCommon/templates/ngDialogTemplates.html'"></div>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+<script src="bower_components/ngDialog/js/ngDialog.js"></script>
+<script src="bower_components/facebook/facebook.js"></script>
+<script src="bower_components/google/gapi.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="bower_components/angularjs-toaster/toaster.js"></script>
+<script src="bower_components/socket.io/lib/socket-io.js"></script>
+<script src="ngCommon/services/fileUpload/fileUpload.js"></script>
+<script src="configuration/app.js"></script>
+<script src="configuration/configuration.js"></script>
+<script src="ngCommon/services/facebook/FacebookService.js"></script>
+<script src="ngCommon/services/ngDialog/DialogService.js"></script>
+<script src="ngCommon/services/directives.js"></script>
+<script src="indexController.js"></script>
+
+</body>
+</html>

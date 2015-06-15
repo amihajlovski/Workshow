@@ -1,0 +1,16 @@
+<script type="text/ng-template" id="loginTemplate">
+    <div class="ngdialog-content">
+        <div class="dialogHeader">
+            <span class="glyphicon glyphicon-remove-sign close" ng-click="dialog.close()"></span>
+        </div>
+        <div class="socialDiv">
+            <center>
+                <p>connect using your social accounts</p>
+                <md-button class="md-raised facebookButton" ng-click="loginWithFacebook(ngDialogData.userType)">facebook</md-button>
+                <p class="margin">-- OR --</p>
+                <md-button class="md-raised googleButton" ng-click="loginWithGoogle(ngDialogData.userType)">google</md-button>
+            </center>
+            <!--<p class="facebookButton md-raised">Facebook</p>-->
+        </div>
+    </div>
+</script>
