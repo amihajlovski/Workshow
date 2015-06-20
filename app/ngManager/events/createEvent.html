@@ -1,4 +1,4 @@
-<div class="container containerMarginTop">
+<div class="container containerMarginTop" style="background-color: whitesmoke;">
     <div class="row">
         <p class="stock-title">
             create event
@@ -6,36 +6,80 @@
     </div>
     <div class="row">
         <p class="stock-title">
-            <input type="text" class="search-events eventInputOutline nobold" placeholder="Enter title of the event..."/>
+            <input type="text" class="search-events eventInputOutline nobold
+            {{event.invalidProperties.indexOf('title')==-1?'':'inputInvalid'}}"
+                   placeholder="Enter title of the event..."
+                   ng-model="event.title"/>
         </p>
     </div>
     <div class="row">
         <p class="stock-title">
-            <center>
-                <input id="files" type="file" class="search-events eventInputOutline fileUploadInput"
-                       ng-click="initializeUploader('files', 'eventCover')" />
-            </center>
+            <input type="text"
+                   ng-model="event.date"
+                   placeholder="Enter date of the event..."
+                   class="search-events eventInputOutline nobold
+                   {{event.invalidProperties.indexOf('date')==-1?'':'inputInvalid'}}"
+                   datepicker-popup="{{datepicker.format}}"
+                   ng-model="datepicker.date"
+                   is-open="datepicker.opened"
+                   min-date="datepicker.minDate"
+                   datepicker-options="datepicker.options" close-text="Close"
+                   ng-click="datepicker.open($event)"
+                   style="width: 315px;"/>
+            <select
+                    placeholder="and time..."
+                    ng-model="event.time"
+                    class="search-events eventInputOutline nobold
+                    {{event.invalidProperties.indexOf('time')==-1?'':'inputInvalid'}}"
+                    style="width: 10%;">
+                <option ng-repeat="time in event.generateTimings()">{{time}}</option>
+            </select>
+        </p>
+    </div>
+    <div class="row" style="margin-left: -5px;">
+        <p class="stock-title">
+            <div class="search-events eventInputOutline fileUploadInput {{event.invalidProperties.indexOf('image')==-1?'':'inputInvalid'}}">
+                <center>
+                    <p>Insert cover image for your event</p>
+                    <input id="files" type="file" ng-click="initializeUploader('files', 'eventCover')"/>
+                    <img ng-if="event.image != null" src="{{event.image.source}}"/>
+                </center>
+            </div>
         </p>
     </div>
     <div class="row">
         <p class="stock-title">
-            <input type="text" class="search-events eventInputOutline nobold" placeholder="Enter date of the event..."/>
+            <textarea ng-model="event.description" class="search-events eventInputOutline eventDescription nobold
+            {{event.invalidProperties.indexOf('description')==-1?'':'inputInvalid'}}"
+                      placeholder="Enter description of the event..."></textarea>
         </p>
     </div>
     <div class="row">
         <p class="stock-title">
-            <input type="text" class="search-events eventInputOutline nobold" placeholder="Enter keywords of the event..."/>
+            <input type="text" class="search-events eventInputOutline nobold
+            {{event.invalidProperties.indexOf('location')==-1?'':'inputInvalid'}}"
+                   placeholder="Enter location of the event..."
+                   ng-model="event.location"/>
+        </p>
+    </div>
+    <div class="row">
+        <p class="stock-title tagsStyle">
+            <tags-input ng-model="event.keywords"class="search-events eventInputOutline nobold centerTags
+            {{event.invalidProperties.indexOf('keywords')==-1?'':'inputInvalid'}}"></tags-input>
         </p>
     </div>
     <div class="row">
         <p class="stock-title">
-            <input type="text" class="search-events eventInputOutline nobold" placeholder="Enter salary for the artist..."/>
+            <input type="number" class="search-events eventInputOutline nobold
+            {{event.invalidProperties.indexOf('salary')==-1?'':'inputInvalid'}}"
+                   placeholder="Enter salary for the artist..."
+                   ng-model="event.salary"/>
         </p>
     </div>
     <div class="row">
         <p class="stock-title">
-            <md-button class="startManagingButton saveBtnColor">save</md-button>
-            <md-button class="loginButton">cancel</md-button>
+            <md-button class="startManagingButton saveBtnColor" ng-click="event.save()">save</md-button>
+            <md-button class="loginButton" ng-click="redirect('/')">cancel</md-button>
         </p>
     </div>
 

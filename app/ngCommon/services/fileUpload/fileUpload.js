@@ -52,8 +52,8 @@
                     data = progressStatus;
                 };
                 var _moveUpload= function(fileboxID,data){
-                    if(data.performanceID){
-                        socket[fileboxID].emit('MoveTemp', {'Name': data.Name, 'type':data['type'], 'performanceID':data.performanceID});
+                    if(data.eventID){
+                        socket[fileboxID].emit('MoveTemp', {'Name': data.Name, 'type':data['type'], 'eventID':data.eventID});
                     }else{
                         socket[fileboxID].emit('MoveTemp', {'Name': data.Name, 'type':data['type']});
                     }

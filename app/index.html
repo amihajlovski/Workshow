@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="configuration/app.css">
     <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog.css">
     <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css">
+    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css">
 </head>
 <body>
 <toaster-container class="toastPosition"></toaster-container>
@@ -50,7 +51,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-if="loggedUser!=null">
                 <li>
-                    <md-button class="createEvent" ng-if="loggedUser.Manager" ng-click="redirectTo('/create-event')">create event</md-button>
+                    <md-button class="createEvent" ng-click="redirectTo('/events')">events</md-button>
                     <img src="{{avatar}}" class="avatar" ng-click="toggleDropDownMenu()"/>
                     <span class="userInfo" ng-click="toggleDropDownMenu()">{{loggedUser.Name}}</span>
                 </li>
@@ -69,7 +70,7 @@
     </div>
 </nav>
 
-<div ng-view></div>
+<div ng-view style="background-color: whitesmoke;"></div>
 
 <div ng-include="'ngCommon/templates/ngDialogTemplates.html'"></div>
 
@@ -85,7 +86,10 @@
 <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <script src="bower_components/angularjs-toaster/toaster.js"></script>
 <script src="bower_components/socket.io/lib/socket-io.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="ngCommon/services/fileUpload/fileUpload.js"></script>
+<script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
 <script src="configuration/app.js"></script>
 <script src="configuration/configuration.js"></script>
 <script src="ngCommon/services/facebook/FacebookService.js"></script>

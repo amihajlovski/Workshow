@@ -10,7 +10,9 @@ var app = angular.module('graduateApp', [
     'googleplus',
     'toaster',
     'ngAnimate',
-    'FileUpload'
+    'FileUpload',
+    'ui.bootstrap',
+    'ngTagsInput'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', 'GooglePlusProvider', 'config',
@@ -41,6 +43,16 @@ app.config(['$routeProvider', '$httpProvider', 'GooglePlusProvider', 'config',
                 }]
             },
             access: {loginNeeded: false, allowedUserRoles: 'all'}
+        }).
+        when('/events', {
+            templateUrl: 'ngManager/events/allevents.html',
+            controller: 'EventsController',
+            resolve: {
+                loadController: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load('ngManager/events/EventsController.js');
+                }]
+            },
+            access: {loginNeeded: true, allowedUserRoles: 'all'}
         }).
         when('/event/:id', {
             templateUrl: 'ngManager/events/event.html',

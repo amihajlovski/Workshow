@@ -19,7 +19,6 @@ configuration.constant('config', {
         xfbml: true,
         version: 'v2.3'
     },
-
     "googleInitSettings": {
         clientId: '90741444387-le30kaop43o711p889in8a4vt78qfbo5.apps.googleusercontent.com',
         scopes: 'https://www.googleapis.com/auth/userinfo.email'
@@ -27,6 +26,8 @@ configuration.constant('config', {
 
     "login": apiURL + "artist/login", // [POST]
     "managerlogin": apiURL + "manager/login", // [POST]
-    "profile": apiURL + "user/info" // [GET]
+    "profile": apiURL + "user/info", // [GET]
+    "event": apiURL + "manager/event" // [POST]
+
 
 });

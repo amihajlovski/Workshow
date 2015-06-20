@@ -226,7 +226,7 @@ p {
     padding-bottom: 20px;
 }
 .cities {
-    background-color: whitesmoke;
+    background-color: white;
     height: 300px;
 }
 .search-events {
@@ -322,7 +322,48 @@ p {
 .fileUploadInput {
     padding-top: 15px;
     background-color: white !important;
+    margin: 0 auto;
+    height: auto;
+    padding-bottom: 10px;
+}
+.fileUploadInput p {
+    letter-spacing: 2px;
 }
 .nobold {
     font-weight: normal !important;
+}
+.dropdown-menu {
+    top: 280px !important;
+}
+.eventDescription {
+    height: 100px;max-width: 40%;
+}
+.inputInvalid {
+    border: 1px solid red;
+}
+.fileUploadInput img {
+    width: 300px;
+    margin: 15px;
+}
+.widerButton {
+    width: auto;
+    margin: 0 auto;
+    display: block;
+    float: none;
+    height: 70px;
+}
+.marginTopEvent {
+    margin-top: 50px;
+}
+.tagsStyle {
+    height: auto !important;
+    margin-left: 5px;
+}
+.centerTags{
+    min-height: 55px;
+    height: auto;
+    margin: 0 auto;
+}
+.lineMargin {
+    margin-top: 30px;
 }
