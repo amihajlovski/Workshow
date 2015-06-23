@@ -6,6 +6,12 @@ var app = angular.module('graduateApp');
 
 app.controller('EventsController', function ($scope, $http, dialog, config, localStorageService, fileUpload, toaster, $location) {
 
+    $scope.user = localStorageService.get('loginInfo');
+
+    //CREATE EVENT
+    /////////////////////////////////////
+    /////////////////////////////////////
+
     $scope.datepicker = {
         date: "",
         opened: false,
@@ -21,9 +27,7 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
             $scope.datepicker.opened = true;
         }
     };
-    $scope.redirect = function(url){
-        $location.path(url);
-    }
+
     $scope.event = {
         title: "",
         date: "",
@@ -84,6 +88,19 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
                 });
             }
         }
+    };
+
+    //ALL EVENTS
+    /////////////////////////////////////
+    /////////////////////////////////////
+
+    $scope.events = {
+        data: [],
+        filter: "All"
+    };
+
+    $scope.redirect = function(url){
+        $location.path(url);
     };
 
     //FILE UPLOAD

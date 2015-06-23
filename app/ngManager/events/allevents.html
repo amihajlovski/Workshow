@@ -1,12 +1,26 @@
 <div class="container containerMarginTop" style="background-color: whitesmoke;">
-    <div class="row">
+    <div class="row" ng-if="user.Manager">
         <div class="col-md-12 marginTopEvent">
             <md-button class="createEvent widerButton" ng-click="redirect('/create-event')">create event</md-button>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-if="user.Manager">
         <div class="col-md-12 lineMargin">
             <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1 col-md-offset-4">
+            <p class="eventCategories {{events.filter == 'All' ? 'eventSelected' : ''}}">All</p>
+        </div>
+        <div class="col-md-1" ng-if="user.Manager">
+            <p class="eventCategories {{events.filter == 'Your' ? 'eventSelected' : ''}}">Your</p>
+        </div>
+        <div class="col-md-1">
+            <p class="eventCategories {{events.filter == 'Trending' ? 'eventSelected' : ''}}">Trending</p>
+        </div>
+        <div class="col-md-1">
+            <input class="eventSearchByKeyword" placeholder="Show by keyword"/>
         </div>
     </div>
 </div>

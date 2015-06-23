@@ -367,3 +367,23 @@ p {
 .lineMargin {
     margin-top: 30px;
 }
+.eventCategories {
+    font: 16px bellaboo;
+    cursor: pointer;
+}
+.eventSelected {
+    background-color: #00A877;
+    color: white;
+    width: 30px;
+    text-align: center;
+    padding: 3px;
+    border-radius: 3px;
+}
+.eventSearchByKeyword {
+    border: 1px solid #00A877;
+    outline: none;
+    font: 14px bellaboo;
+    font-weight: normal;
+    height: 25px;
+    float: left;
+}

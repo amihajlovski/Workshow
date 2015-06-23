@@ -102,9 +102,10 @@ app.factory('httpInterceptor', function($q, $rootScope, $location, localStorageS
 
 });
 
-app.run(function($rootScope, $location, localStorageService, $document) {
+app.run(function($rootScope, $location, localStorageService, $document, $window) {
 
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
+        $window.scrollTo(0, 0);
         showSearchInputIfNecessary(next);
     });
 
