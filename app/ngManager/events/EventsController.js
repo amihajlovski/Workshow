@@ -96,16 +96,24 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
 
     $scope.events = {
         data: [],
-        filter: "All",
+        filter: 0,
+        keyword: "",
         count: 6,
         offset: 0,
         total: 0,
         getData: function(){
-            var query = "?count=" + this.count + "&offset=" + this.offset;
+            var query = "?count=" + this.count + "&offset=" + this.offset + "&filter=" + this.filter;
+            if(this.filter==3)
+                query += "&keyword=" + this.keyword;
+            else
+                this.keyword = "";
             $http.get(config.events + query).success(function(response){
                 if(response.Status.Is_valid === "true"){
                     $scope.events.total = response.Data.Total;
                     $scope.events.data = response.Data.Events;
+                } else {
+                    $scope.events.total = 0;
+                    $scope.events.data = [];
                 }
             });
         },
@@ -116,7 +124,14 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
             return moment(date).format("DD MMMM YYYY - HH:mm");
         }
     };
-    $scope.events.getData();
+
+    function makeRequestByView(){
+        switch ($location.url()){
+            case '/events':
+                return $scope.events.getData();
+        }
+    }
+    makeRequestByView();
 
     $scope.redirect = function(url){
         $location.path(url);

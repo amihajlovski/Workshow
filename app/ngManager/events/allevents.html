@@ -11,20 +11,20 @@
     </div>
     <div class="row containerMarginTop">
         <div class="col-md-1 col-md-offset-4">
-            <p class="eventCategories {{events.filter == 'All' ? 'eventSelected' : ''}}" ng-click="events.filter='All';">All</p>
+            <p class="eventCategories {{events.filter == 0 ? 'eventSelected' : ''}}" ng-click="events.filter=0;events.getData();">All</p>
         </div>
         <div class="col-md-1" ng-if="user.Manager">
-            <p class="eventCategories {{events.filter == 'Your' ? 'eventSelected' : ''}}" ng-click="events.filter='Your';">Your</p>
+            <p class="eventCategories {{events.filter == 1 ? 'eventSelected' : ''}}" ng-click="events.filter=1;events.getData();">Your</p>
         </div>
         <div class="col-md-1">
-            <p class="eventCategories {{events.filter == 'Popular' ? 'eventSelected' : ''}}" ng-click="events.filter='Popular';">Popular</p>
+            <p class="eventCategories {{events.filter == 2 ? 'eventSelected' : ''}}" ng-click="events.filter=2;">Popular</p>
         </div>
         <div class="col-md-1">
-            <input class="eventSearchByKeyword" placeholder="Show by keyword"/>
+            <input ng-model="events.keyword" class="eventSearchByKeyword" placeholder="Show by keyword" ng-enter="events.filter=3;events.getData()"/>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 containerMarginTop" ng-repeat="event in events.data">
+        <div class="col-md-4 containerMarginTop" ng-repeat="event in events.data" ng-if="events.total>0">
             <div class="event">
                 <img src="{{events.formatEventImageURL(event.Manager, event._id, event.Image)}}"/>
                 <p>{{event.Title}}</p>
@@ -38,6 +38,9 @@
                     <p class="favoriteThis glyphicon glyphicon-heart"></p>
                 </div>
             </div>
+        </div>
+        <div class="col-md-12 containerMarginTop" ng-if="events.total==0">
+            <p class="stock-title">No events found</p>
         </div>
     </div>
 </div>
