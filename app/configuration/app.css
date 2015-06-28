@@ -426,3 +426,6 @@ p {
     float: right;
     color: #F12938;
 }
+.event .favoriteThis:focus{
+    outline: none;
+}

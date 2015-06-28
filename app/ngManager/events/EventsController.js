@@ -38,6 +38,11 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
         keywords: [],
         salary: null,
         invalidProperties: [],
+        markAsFavorite: function(event){
+            $http.get(config.eventsFavorite.replace("$eid", event._id)).success(function(response){
+                event.Favorited = !event.Favorited;
+            });
+        },
         generateTimings: function(){
             var timings = [];
             for(var i = 0; i < 24; i++){

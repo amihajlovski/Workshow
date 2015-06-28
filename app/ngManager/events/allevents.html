@@ -24,18 +24,19 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 containerMarginTop" ng-repeat="event in events.data" ng-if="events.total>0">
+        <div class="col-md-4 containerMarginTop" ng-repeat="ev in events.data" ng-if="events.total>0">
             <div class="event">
-                <img src="{{events.formatEventImageURL(event.Manager, event._id, event.Image)}}"/>
-                <p>{{event.Title}}</p>
+                <img src="{{events.formatEventImageURL(ev.Manager, ev._id, ev.Image)}}"/>
+                <p>{{ev.Title}}</p>
                 <div class="details">
                     <p class="glyphicon glyphicon-time" style="float: left;"></p>
-                    <span class="hint--top" data-hint="Date of the event">{{events.formatDateFormat(event.Date)}}</span>
+                    <span class="hint--top" data-hint="Date of the event">{{events.formatDateFormat(ev.Date)}}</span>
                 </div>
                 <div class="details">
                     <p class="glyphicon glyphicon-eur" style="float: left;"></p>
-                    <span class="hint--top" data-hint="Salary for chosen artist">{{event.Salary}}</span>
-                    <p class="favoriteThis glyphicon glyphicon-heart"></p>
+                    <span class="hint--top" data-hint="Salary for chosen artist">{{ev.Salary}}</span>
+                    <p ng-if="user.Logged" ng-click="event.markAsFavorite(ev)"
+                       class="favoriteThis {{ev.Favorited ? 'glyphicon glyphicon-heart' : 'glyphicon glyphicon-heart-empty'}}"></p>
                 </div>
             </div>
         </div>

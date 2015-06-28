@@ -29,6 +29,7 @@ configuration.constant('config', {
     "managerlogin": apiURL + "manager/login", // [POST]
     "profile": apiURL + "user/info", // [GET]
     "event": apiURL + "manager/event", // [POST]
-    "events": apiURL + "events" // [GET]
+    "events": apiURL + "events", // [GET]
+    "eventsFavorite": apiURL + "events/$eid/favorite" // [GET]
 
 });
