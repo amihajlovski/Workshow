@@ -17,7 +17,7 @@ app.controller('IndexController',
             "template": "loginTemplate",
             "showClose": false,
             "controller": "IndexController",
-            "userType": 'artist'
+            "data": {"userType": 'artist'}
         };
 
         $scope.$watch(function () {
@@ -57,6 +57,8 @@ app.controller('IndexController',
         };
 
         function processLogin(req, userType) {
+            console.log('process login');
+            console.log(userType);
             var url = userType == 'artist' ? config.login : config.managerlogin;
             $http.post(url, req).success(function (response) {
                 if (response.Status.Is_valid == "true") {

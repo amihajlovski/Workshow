@@ -11,6 +11,7 @@ configuration.constant('config', {
     "apiURL": apiURL,
     "apiBaseURL": apiBaseURL,
     "avatarURL": apiBaseURL + "public/data/users/$id/avatar/avatar.jpg",
+    "eventImageURL": apiBaseURL + "public/data/users/$uid/events/$eid/images/",
 
     "facebookInitSettings" : {
         appId: '480494712119788',
@@ -27,7 +28,7 @@ configuration.constant('config', {
     "login": apiURL + "artist/login", // [POST]
     "managerlogin": apiURL + "manager/login", // [POST]
     "profile": apiURL + "user/info", // [GET]
-    "event": apiURL + "manager/event" // [POST]
-
+    "event": apiURL + "manager/event", // [POST]
+    "events": apiURL + "events" // [GET]
 
 });

@@ -9,18 +9,35 @@
             <hr>
         </div>
     </div>
-    <div class="row">
+    <div class="row containerMarginTop">
         <div class="col-md-1 col-md-offset-4">
-            <p class="eventCategories {{events.filter == 'All' ? 'eventSelected' : ''}}">All</p>
+            <p class="eventCategories {{events.filter == 'All' ? 'eventSelected' : ''}}" ng-click="events.filter='All';">All</p>
         </div>
         <div class="col-md-1" ng-if="user.Manager">
-            <p class="eventCategories {{events.filter == 'Your' ? 'eventSelected' : ''}}">Your</p>
+            <p class="eventCategories {{events.filter == 'Your' ? 'eventSelected' : ''}}" ng-click="events.filter='Your';">Your</p>
         </div>
         <div class="col-md-1">
-            <p class="eventCategories {{events.filter == 'Trending' ? 'eventSelected' : ''}}">Trending</p>
+            <p class="eventCategories {{events.filter == 'Popular' ? 'eventSelected' : ''}}" ng-click="events.filter='Popular';">Popular</p>
         </div>
         <div class="col-md-1">
             <input class="eventSearchByKeyword" placeholder="Show by keyword"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 containerMarginTop" ng-repeat="event in events.data">
+            <div class="event">
+                <img src="{{events.formatEventImageURL(event.Manager, event._id, event.Image)}}"/>
+                <p>{{event.Title}}</p>
+                <div class="details">
+                    <p class="glyphicon glyphicon-time" style="float: left;"></p>
+                    <span class="hint--top" data-hint="Date of the event">{{events.formatDateFormat(event.Date)}}</span>
+                </div>
+                <div class="details">
+                    <p class="glyphicon glyphicon-eur" style="float: left;"></p>
+                    <span class="hint--top" data-hint="Salary for chosen artist">{{event.Salary}}</span>
+                    <p class="favoriteThis glyphicon glyphicon-heart"></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

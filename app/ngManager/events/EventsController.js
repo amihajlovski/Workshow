@@ -96,8 +96,27 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
 
     $scope.events = {
         data: [],
-        filter: "All"
+        filter: "All",
+        count: 6,
+        offset: 0,
+        total: 0,
+        getData: function(){
+            var query = "?count=" + this.count + "&offset=" + this.offset;
+            $http.get(config.events + query).success(function(response){
+                if(response.Status.Is_valid === "true"){
+                    $scope.events.total = response.Data.Total;
+                    $scope.events.data = response.Data.Events;
+                }
+            });
+        },
+        formatEventImageURL: function(userID, eventID, imageName){
+            return config.eventImageURL.replace("$uid", userID).replace("$eid", eventID) + imageName;
+        },
+        formatDateFormat: function(date){
+            return moment(date).format("DD MMMM YYYY - HH:mm");
+        }
     };
+    $scope.events.getData();
 
     $scope.redirect = function(url){
         $location.path(url);

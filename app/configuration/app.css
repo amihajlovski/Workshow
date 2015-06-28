@@ -370,14 +370,20 @@ p {
 .eventCategories {
     font: 16px bellaboo;
     cursor: pointer;
+    text-align: center;
+}
+.eventCategories:active{
+    outline: none;
 }
 .eventSelected {
+    font: 16px bellaboo;
     background-color: #00A877;
     color: white;
-    width: 30px;
+    width: auto;
     text-align: center;
     padding: 3px;
     border-radius: 3px;
+    outline: 0;
 }
 .eventSearchByKeyword {
     border: 1px solid #00A877;
@@ -386,4 +392,37 @@ p {
     font-weight: normal;
     height: 25px;
     float: left;
+}
+.event{
+    width: 100%;
+    background-color: white;
+    height: 300px;
+    border: 1px solid lightgray;
+}
+.event img {
+    width: 97%;
+    height: 50%;
+    margin: 5px;
+}
+.event p{
+    margin: 5px;
+    font-size: 20px;
+}
+.event .details{
+    float: left;
+    clear: both;
+    margin: 15px 0 0 0;
+    width: 100%;
+}
+.event span{
+    font-size: 15px;
+    font-family: bellaboo;
+    color: #00A877;
+    margin: 5px 0px 0px 5px;
+    float: left;
+}
+.event .favoriteThis{
+    cursor: pointer;
+    float: right;
+    color: #F12938;
 }
