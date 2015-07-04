@@ -27,7 +27,8 @@
         <div class="col-md-4 containerMarginTop" ng-repeat="ev in events.data" ng-if="events.total>0">
             <div class="event">
                 <img src="{{events.formatEventImageURL(ev.Manager, ev._id, ev.Image)}}"/>
-                <p>{{ev.Title}}</p>
+                <p class="title">{{ev.Title}}</p>
+                <p class="by" ng-click="redirect('/user/' + ev.Manager_info._id)">by {{ev.Manager_info.Name + ' ' + ev.Manager_info.Surname}}</p>
                 <div class="details">
                     <p class="glyphicon glyphicon-time" style="float: left;"></p>
                     <span class="hint--top" data-hint="Date of the event">{{events.formatDateFormat(ev.Date)}}</span>

@@ -16,8 +16,9 @@ app.controller('ProfileController', function ($scope, $http, $routeParams, confi
             data: [],
             total: 0,
             getData: function(){
-                var requrl = config.events + "?filter=1&userid=" + this.ID;
+                var requrl = config.events + "?filter=1&userid=" + $scope.user.ID;
                 $http.get(requrl).success(function(response){
+                    console.log(response);
                     if(response.Status.Is_valid == 'true'){
                         $scope.user.events.data = response.Data.Events;
                         $scope.user.events.total = response.Data.Total;

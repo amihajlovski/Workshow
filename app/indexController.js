@@ -108,6 +108,7 @@ app.controller('IndexController',
         };
 
         $scope.redirectTo = function(route){
+            $scope.showDropdownMenu = false;
             $location.path(route);
         };
 

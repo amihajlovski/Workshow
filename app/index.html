@@ -62,7 +62,7 @@
             </ul>
             <div ng-show="loggedUser!=null && showDropdownMenu">
                 <ul class="logoutMenu">
-                    <li>Profile</li>
+                    <li ng-click="redirectTo('/user/' + loggedUser.User_id)">Profile</li>
                     <li class="noBottomBorder" ng-click="logout()">Logout</li>
                 </ul>
                 <span class="glyphicon glyphicon-triangle-top logoutArrow"></span>

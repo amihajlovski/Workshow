@@ -7,7 +7,7 @@
             <p class="type">{{user.info.Artist == true ? 'Artist' : 'Manager'}}</p>
             <p class="name">{{user.info.Name + ' ' + user.info.Surname}}</p>
             <p>{{user.info.Email}}</p>
-            <p ng-if="user.events.loaded && user.info.Manager==true">10 events</p>
+            <p ng-if="user.events.loaded && user.info.Manager==true">{{user.events.total}} events</p>
         </div>
     </div>
     <div class="row" ng-if="user.events.total>0">

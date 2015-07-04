@@ -403,15 +403,19 @@ p {
     width: 97%;
     height: 50%;
     margin: 5px;
+    cursor: pointer;
 }
 .event p{
     margin: 5px;
     font-size: 20px;
 }
+.event .title {
+    cursor: pointer;
+}
 .event .details{
     float: left;
     clear: both;
-    margin: 15px 0 0 0;
+    margin: 0 0 0 0;
     width: 100%;
 }
 .event span{
@@ -427,6 +431,16 @@ p {
     color: #F12938;
 }
 .event .favoriteThis:focus{
+    outline: none;
+}
+.event .by{
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: grey;
+    cursor: pointer;
+    outline: none;
+}
+.event .by:focus{
     outline: none;
 }
 .userProfileAvatar{
