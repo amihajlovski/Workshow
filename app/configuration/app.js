@@ -74,6 +74,16 @@ app.config(['$routeProvider', '$httpProvider', 'GooglePlusProvider', 'config',
             },
             access: {loginNeeded: true, allowedUserRoles: 'manager'}
         }).
+        when('/user/:id', {
+            templateUrl: 'ngCommon/profile/profile.html',
+            controller: 'ProfileController',
+            resolve: {
+                loadController: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load('ngCommon/profile/profileController.js');
+                }]
+            },
+            access: {loginNeeded: false, allowedUserRoles: 'all'}
+        }).
         otherwise({redirectTo: '/'});
 }]);
 
@@ -119,5 +129,5 @@ app.run(function($rootScope, $location, localStorageService, $document, $window)
 
 function showSearchInputIfNecessary(route) {
     var el = document.getElementById('headerSearch');
-    el.style.visibility = route.$$route.originalPath != '/' ? 'visible' : 'hidden';
+    el.style.visibility = route.hasOwnProperty('$$route') && route.$$route.originalPath != '/' ? 'visible' : 'hidden';
 }

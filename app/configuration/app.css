@@ -429,3 +429,15 @@ p {
 .event .favoriteThis:focus{
     outline: none;
 }
+.userProfileAvatar{
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;
+}
+.userProfile p.name{
+    font-size: 25px;
+}
+.userProfile p.type{
+    color: #FF6700;
+    font-size: 25px;
+}

@@ -1,0 +1,29 @@
+<div class="container containerMarginTop" style="background-color: whitesmoke;">
+    <div class="row containerMarginTop" ng-if="user.loaded">
+        <div class="col-md-3 col-md-offset-3">
+            <img src="{{user.avatar}}" alt="" class="userProfileAvatar"/>
+        </div>
+        <div class="col-md-6 userProfile" ng-if="user.info!=null">
+            <p class="type">{{user.info.Artist == true ? 'Artist' : 'Manager'}}</p>
+            <p class="name">{{user.info.Name + ' ' + user.info.Surname}}</p>
+            <p>{{user.info.Email}}</p>
+            <p ng-if="user.events.loaded && user.info.Manager==true">10 events</p>
+        </div>
+    </div>
+    <div class="row" ng-if="user.events.total>0">
+        <div class="col-md-4 containerMarginTop" ng-repeat="ev in user.events.data">
+            <div class="event">
+                <img src="{{user.events.formatEventImageURL(ev.Manager, ev._id, ev.Image)}}"/>
+                <p>{{ev.Title}}</p>
+                <div class="details">
+                    <p class="glyphicon glyphicon-time" style="float: left;"></p>
+                    <span class="hint--top" data-hint="Date of the event">{{user.events.formatDateFormat(ev.Date)}}</span>
+                </div>
+                <div class="details">
+                    <p class="glyphicon glyphicon-eur" style="float: left;"></p>
+                    <span class="hint--top" data-hint="Salary for chosen artist">{{ev.Salary}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
