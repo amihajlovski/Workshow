@@ -84,6 +84,16 @@ app.config(['$routeProvider', '$httpProvider', 'GooglePlusProvider', 'config',
             },
             access: {loginNeeded: false, allowedUserRoles: 'all'}
         }).
+        when('/user/:id/edit', {
+            templateUrl: 'ngCommon/profile/addInfo.html',
+            controller: 'ProfileController',
+            resolve: {
+                loadController: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load('ngCommon/profile/profileController.js');
+                }]
+            },
+            access: {loginNeeded: true, allowedUserRoles: 'all'}
+        }).
         otherwise({redirectTo: '/'});
 }]);
 

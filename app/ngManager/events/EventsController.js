@@ -115,12 +115,17 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
             $http.get(config.events + query).success(function(response){
                 if(response.Status.Is_valid === "true"){
                     $scope.events.total = response.Data.Total;
-                    $scope.events.data = response.Data.Events;
-                } else {
-                    $scope.events.total = 0;
-                    $scope.events.data = [];
+                    if($scope.events.offset==0)
+                        $scope.events.data = response.Data.Events;
+                    else
+                        $scope.events.processData(response.Data.Events);
                 }
             });
+        },
+        processData: function(events){
+            for(var i = 0, event; event = events[i]; i++){
+                $scope.events.data.push(event);
+            }
         },
         formatEventImageURL: function(userID, eventID, imageName){
             return config.eventImageURL.replace("$uid", userID).replace("$eid", eventID) + imageName;

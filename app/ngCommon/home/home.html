@@ -10,34 +10,22 @@
     </div>
 </div>
 <div class="container">
-    <div class="row">
+    <div class="row" ng-if="managers.data.length>0">
         <div class="col-md-12">
-            <p class="stock-title">what you have to do</p>
+            <p class="stock-title">newest <span style="color: #FF6700;">managers</span></p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-3">
-            <img class="stock-vector" src="content/images/vector1.jpg" />
-            <p class="stock-vector-paragraph">find</p>
-            <p class="stock-vector-info">search for an events in your city</p>
-        </div>
-        <div class="col-md-3 col-md-offset-1">
-            <img class="stock-vector" src="content/images/vector2.jpg" />
-            <p class="stock-vector-paragraph">events</p>
-            <p class="stock-vector-info">arrange an event as a manager or join as artist</p>
-        </div>
-        <div class="col-md-3 col-md-offset-1">
-            <img class="stock-vector" src="content/images/vector3.jpg" />
-            <p class="stock-vector-paragraph">gain experience</p>
-            <p class="stock-vector-info">improve your rating for future events</p>
-        </div>
-    </div>
-</div>
-<div class="cities">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="stock-title">cities with most events</p>
+    <div class="row rowManagers" ng-if="managers.data.length>0">
+        <div class="col-md-4 userProfile" ng-repeat="user in managers.data">
+            <div style="float:left;">
+                <img ng-src="{{managers.formatAvatarImage(user._id)}}" alt="" class="userProfileAvatarOverride"
+                     ng-click="managers.viewProfile(user._id)"
+                     style="outline: none;"/>
+            </div>
+            <div class="userInfoHome">
+                <p class="name" ng-click="managers.viewProfile(user._id)">{{user.Name}}</p>
+                <p class="name" ng-click="managers.viewProfile(user._id)">{{user.Surname}}</p>
+                <p><a href="mailto:{{user.Email}}" style="color: #FF6700;">{{user.Email}}</a></p>
             </div>
         </div>
     </div>

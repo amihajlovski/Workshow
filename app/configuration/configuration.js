@@ -25,13 +25,15 @@ configuration.constant('config', {
         scopes: 'https://www.googleapis.com/auth/userinfo.email'
     },
 
-    "login": apiURL + "artist/login", // [POST]
-    "managerlogin": apiURL + "manager/login", // [POST]
-    "profile": apiURL + "user/info", // [GET]
-    "event": apiURL + "manager/event", // [POST]
-    "events": apiURL + "events", // [GET]
-    "eventsFavorite": apiURL + "events/$eid/favorite", // [GET]
-    "managerEvents": apiURL + "manager/:id/events", // [GET]
-    "userByID": apiURL + "user/:id" // [GET]
+    "login": apiURL + "artist/login",                   // [POST]
+    "managerlogin": apiURL + "manager/login",           // [POST]
+    "profile": apiURL + "user/info",                    // [GET]
+    "event": apiURL + "manager/event",                  // [POST]
+    "events": apiURL + "events",                        // [GET]
+    "eventsFavorite": apiURL + "events/$eid/favorite",  // [GET]
+    "managerEvents": apiURL + "manager/:id/events",     // [GET]
+    "userByID": apiURL + "user/:id",                    // [GET]
+    "newestManagers": apiURL + "user/newest",           // [GET]
+    "updateUser": apiURL + "user/info/update"           // [POST]
 
 });

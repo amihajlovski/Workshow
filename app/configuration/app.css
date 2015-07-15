@@ -448,10 +448,73 @@ p {
     height: 200px;
     width: 200px;
 }
+.userProfileAvatarOverride {
+    cursor: pointer;
+    border-radius: 100px;
+    width: 100px;
+    height: 100px;
+}
 .userProfile p.name{
     font-size: 25px;
 }
 .userProfile p.type{
     color: #FF6700;
     font-size: 25px;
+}
+.profileAdditionalInfoTitle{
+    font-size: 48px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    padding: 20px 0 0 0;
+    letter-spacing: 5px;
+    cursor: pointer;
+}
+.profileAdditionalInfoTitle:focus{
+    outline: none;
+}
+.profileAdditionalInfoTitle span.userType {
+    color: #FF6700;
+}
+.rowManagers {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.userInfoHome{
+    float: left;
+    margin-left: 20px;
+    outline: none;
+}
+.userInfoHome img {
+    outline: none;
+}
+.userInfoHome p{
+    outline: none;
+    cursor: pointer;
+}
+.userInfoHome a{
+    color: #FF6700;
+}
+.userInfoHome a:hover{
+    text-decoration: none;
+}
+.footer {
+    height: 40px;
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.footer p{
+    padding-top: 7px;
+    color: white;
+}
+.skills{
+    float: left;  margin-left: 73px;  width: 468px;height: auto;
+}
+.showMorePadding{
+    padding-top: 20px;
+    padding-bottom: 20px;
 }

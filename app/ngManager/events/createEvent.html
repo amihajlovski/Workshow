@@ -20,7 +20,6 @@
                    class="search-events eventInputOutline nobold
                    {{event.invalidProperties.indexOf('date')==-1?'':'inputInvalid'}}"
                    datepicker-popup="{{datepicker.format}}"
-                   ng-model="datepicker.date"
                    is-open="datepicker.opened"
                    min-date="datepicker.minDate"
                    datepicker-options="datepicker.options" close-text="Close"
@@ -42,7 +41,7 @@
                 <center>
                     <p>Insert cover image for your event</p>
                     <input id="files" type="file" ng-click="initializeUploader('files', 'eventCover')"/>
-                    <img ng-if="event.image != null" src="{{event.image.source}}"/>
+                    <img ng-if="event.image != null" ng-src="{{event.image.source}}"/>
                 </center>
             </div>
         </p>
@@ -64,7 +63,7 @@
     </div>
     <div class="row">
         <p class="stock-title tagsStyle">
-            <tags-input ng-model="event.keywords"class="search-events eventInputOutline nobold centerTags
+            <tags-input placeholder="Add keyword" ng-model="event.keywords"class="search-events eventInputOutline nobold centerTags
             {{event.invalidProperties.indexOf('keywords')==-1?'':'inputInvalid'}}"></tags-input>
         </p>
     </div>

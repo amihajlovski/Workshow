@@ -1,0 +1,71 @@
+<div class="container containerMarginTop" style="background-color: whitesmoke;" ng-if="user.loaded">
+    <div class="row" >
+        <p class="profileAdditionalInfoTitle" ng-click="redirectTo('/user/' + user.info._id)">
+            <span class="userType">{{user.info.Manager == true ? 'Manager' : 'Artist'}}</span>
+            <span>{{user.info.Name + ' ' + user.info.Surname}}</span>
+        </p>
+    </div>
+    <div class="row" style="margin-left: -5px;">
+        <p class="stock-title">
+        <div class="search-events eventInputOutline fileUploadInput"
+             style="margin-left: 420px;">
+            <center>
+                <p>Insert image for your profile</p>
+                <input id="files" type="file" ng-click="initializeUploader('files', 'avatar')"/>
+                <img ng-src="{{user.newAvatar == null ? user.avatar : user.newAvatar.source}}"/>
+            </center>
+        </div>
+        </p>
+    </div>
+    <div class="row">
+        <p class="stock-title">
+            <span style="font-size: 20px;">Name:</span>
+            <input type="text" class="search-events eventInputOutline nobold
+            {{user.missingInfo.indexOf('Name')==-1?'':'inputInvalid'}}"
+                   placeholder="Enter your name..."
+                   ng-model="user.info.Name"
+                   style="margin-left: 57px;"/>
+        </p>
+    </div>
+    <div class="row">
+        <p class="stock-title">
+            <span style="font-size: 20px;">Surname:</span>
+            <input type="text" class="search-events eventInputOutline nobold
+            {{user.missingInfo.indexOf('Surname')==-1?'':'inputInvalid'}}"
+                   placeholder="Enter your surname..."
+                   ng-model="user.info.Surname"/>
+        </p>
+    </div>
+    <div class="row">
+        <p class="stock-title">
+            <span style="font-size: 20px;">Email:</span>
+            <input type="text" class="search-events eventInputOutline nobold
+            {{user.missingInfo.indexOf('Email')==-1?'':'inputInvalid'}}"
+                   placeholder="Enter your email..."
+                   ng-model="user.info.Email"
+                   style="margin-left: 55px;"/>
+        </p>
+    </div>
+    <div class="row" ng-if="user.info.Artist">
+        <p class="stock-title tagsStyle" style="margin-left: 270px;width: auto;">
+            <span style="font-size: 20px;float: left;">Skills:</span>
+            <tags-input placeholder="Add new skill" ng-model="user.info.Skills"class="search-events eventInputOutline nobold centerTags skills">
+                <auto-complete min-length="1" debounce-delay="0" source="loadTags($query)"></auto-complete>
+            </tags-input>
+        </p>
+    </div>
+    <div class="row">
+        <p class="stock-title">
+            <span style="font-size: 20px;">About:</span>
+            <textarea ng-model="user.info.About" class="search-events eventInputOutline eventDescription nobold"
+                      placeholder="Write down something about you..."
+                      style="margin-left: 50px;"></textarea>
+        </p>
+    </div>
+    <div class="row">
+        <p class="stock-title">
+            <md-button class="startManagingButton saveBtnColor" ng-click="user.updateInfo()">save</md-button>
+            <md-button class="loginButton" ng-click="redirectTo('/user/' + user.info._id)">cancel</md-button>
+        </p>
+    </div>
+</div>

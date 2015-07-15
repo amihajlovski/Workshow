@@ -11,7 +11,7 @@
     </div>
     <div class="row containerMarginTop">
         <div class="col-md-1 col-md-offset-4">
-            <p class="eventCategories {{events.filter == 0 ? 'eventSelected' : ''}}" ng-click="events.filter=0;events.getData();">All</p>
+            <p class="eventCategories {{events.filter == 0 ? 'eventSelected' : ''}}" ng-click="events.filter=0;events.getData();">Active</p>
         </div>
         <div class="col-md-1" ng-if="user.Manager">
             <p class="eventCategories {{events.filter == 1 ? 'eventSelected' : ''}}" ng-click="events.filter=1;events.getData();">Your</p>
@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-md-4 containerMarginTop" ng-repeat="ev in events.data" ng-if="events.total>0">
             <div class="event">
-                <img src="{{events.formatEventImageURL(ev.Manager, ev._id, ev.Image)}}"/>
+                <img ng-src="{{events.formatEventImageURL(ev.Manager, ev._id, ev.Image)}}"/>
                 <p class="title">{{ev.Title}}</p>
                 <p class="by" ng-click="redirect('/user/' + ev.Manager_info._id)">by {{ev.Manager_info.Name + ' ' + ev.Manager_info.Surname}}</p>
                 <div class="details">
@@ -43,6 +43,12 @@
         </div>
         <div class="col-md-12 containerMarginTop" ng-if="events.total==0">
             <p class="stock-title">No events found</p>
+        </div>
+    </div>
+    <div class="row" ng-if="events.total > events.limit">
+        <div class="col-md-12 showMorePadding">
+            <center><md-button class="startManagingButton"
+                               ng-click="events.offset=events.offset+events.limit;events.getData()">show more</md-button></center>
         </div>
     </div>
 </div>

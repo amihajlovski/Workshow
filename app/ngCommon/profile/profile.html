@@ -1,20 +1,26 @@
 <div class="container containerMarginTop" style="background-color: whitesmoke;">
     <div class="row containerMarginTop" ng-if="user.loaded">
-        <div class="col-md-3 col-md-offset-3">
-            <img src="{{user.avatar}}" alt="" class="userProfileAvatar"/>
+        <div class="col-md-4">
+            <center><img ng-src="{{user.avatar}}" alt="" class="userProfileAvatar"/></center>
         </div>
-        <div class="col-md-6 userProfile" ng-if="user.info!=null">
+        <div class="col-md-4 userProfile" ng-if="user.info!=null">
             <p class="type">{{user.info.Artist == true ? 'Artist' : 'Manager'}}</p>
             <p class="name">{{user.info.Name + ' ' + user.info.Surname}}</p>
             <p>{{user.info.Email}}</p>
             <p ng-if="user.events.loaded && user.info.Manager==true">{{user.events.total}} events</p>
+            <md-button ng-if="loggedUser && loggedUser.User_id==user.info._id" class="createEvent"
+                       ng-click="redirectTo('/user/' + user.info._id + '/edit')">edit profile</md-button>
+        </div>
+        <div class="col-md-4 userProfile" ng-if="user.info!=null && user.info.About">
+            <p class="type">About</p>
+            <p class="name">{{user.info.About}}</p>
         </div>
     </div>
     <div class="row" ng-if="user.events.total>0">
         <div class="col-md-4 containerMarginTop" ng-repeat="ev in user.events.data">
             <div class="event">
-                <img src="{{user.events.formatEventImageURL(ev.Manager, ev._id, ev.Image)}}"/>
-                <p>{{ev.Title}}</p>
+                <img ng-src="{{user.events.formatEventImageURL(ev.Manager, ev._id, ev.Image)}}"/>
+                <p class="title">{{ev.Title}}</p>
                 <div class="details">
                     <p class="glyphicon glyphicon-time" style="float: left;"></p>
                     <span class="hint--top" data-hint="Date of the event">{{user.events.formatDateFormat(ev.Date)}}</span>
@@ -24,6 +30,12 @@
                     <span class="hint--top" data-hint="Salary for chosen artist">{{ev.Salary}}</span>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row" ng-if="user.events.loaded && user.events.total > user.events.limit">
+        <div class="col-md-12 showMorePadding">
+            <center><md-button class="startManagingButton"
+                               ng-click="user.events.offset=user.events.offset+user.events.limit;user.events.getData()">show more</md-button></center>
         </div>
     </div>
 </div>
