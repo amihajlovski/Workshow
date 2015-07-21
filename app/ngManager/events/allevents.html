@@ -26,8 +26,8 @@
     <div class="row">
         <div class="col-md-4 containerMarginTop" ng-repeat="ev in events.data" ng-if="events.total>0">
             <div class="event">
-                <img ng-src="{{events.formatEventImageURL(ev.Manager, ev._id, ev.Image)}}"/>
-                <p class="title">{{ev.Title}}</p>
+                <img ng-src="{{events.formatEventImageURL(ev.Manager, ev._id, ev.Image)}}" ng-click="redirect('/event/' + ev._id)"/>
+                <p class="title" ng-click="redirect('/event/' + ev._id)">{{ev.Title}}</p>
                 <p class="by" ng-click="redirect('/user/' + ev.Manager_info._id)">by {{ev.Manager_info.Name + ' ' + ev.Manager_info.Surname}}</p>
                 <div class="details">
                     <p class="glyphicon glyphicon-time" style="float: left;"></p>

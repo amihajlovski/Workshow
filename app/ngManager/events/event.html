@@ -1,1 +1,26 @@
-EVENT
+<div class="container containerMarginTop" style="background-color: whitesmoke;">
+    <div class="eventDetails">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="borderBottom title">{{event.data.Title}}</p>
+                <div>
+                    <p style="float: left;">by: <span ng-click="redirect('/user/' + event.data.Manager_info._id)"
+                                                      class="managerName">{{event.data.Manager_info.Name + ' ' + event.data.Manager_info.Surname}}</span></p>
+                    <p style="float: right;">{{event.formatDate()}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row " ng-if="event.loaded">
+            <div class="col-md-12">
+                <img ng-src="{{event.image}}"/>
+            </div>
+        </div>
+    </div>
+    <div class="eventDetails">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="description">{{event.data.Description}}</p>
+            </div>
+        </div>
+    </div>
+</div>

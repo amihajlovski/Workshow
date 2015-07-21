@@ -34,6 +34,7 @@ configuration.constant('config', {
     "managerEvents": apiURL + "manager/:id/events",     // [GET]
     "userByID": apiURL + "user/:id",                    // [GET]
     "newestManagers": apiURL + "user/newest",           // [GET]
-    "updateUser": apiURL + "user/info/update"           // [POST]
+    "updateUser": apiURL + "user/info/update",          // [POST]
+    "eventByID": apiURL + "event/:id"                   // [GET]
 
 });

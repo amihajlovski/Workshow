@@ -405,6 +405,9 @@ p {
     margin: 5px;
     cursor: pointer;
 }
+.event img:focus{
+    outline: none;
+}
 .event p{
     margin: 5px;
     font-size: 20px;
@@ -517,4 +520,34 @@ p {
 .showMorePadding{
     padding-top: 20px;
     padding-bottom: 20px;
+}
+.eventDetails {
+    border: 1px solid #e7e7e7;
+    width: 60%;
+    margin-top: 20px;
+    background: white;
+    padding: 10px;
+}
+.eventDetails img {
+    width: 100%;
+}
+.eventDetails p.title {
+    font-size: 32px;
+}
+.eventDetails .managerName{
+    color: #FF6700;
+    cursor: pointer;
+}
+.eventDetails .managerName:focus{
+    outline: none;
+}
+.eventDetails p.description {
+    font-size: 22px;
+    padding-top: 10px;
+}
+.eventDetails p.borderBottom {
+    border-bottom: 1px solid #e7e7e7;
+}
+.eventDetails p.borderBottom {
+    border-bottom: 1px solid #e7e7e7;
 }

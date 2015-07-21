@@ -4,11 +4,12 @@
 
 var app = angular.module('graduateApp');
 
-app.controller('EventsController', function ($scope, $http, dialog, config, localStorageService, fileUpload, toaster, $location) {
+app.controller('EventsController',
+    function ($scope, $http, dialog, config, localStorageService, fileUpload, toaster, $location, $routeParams) {
 
     $scope.user = localStorageService.get('loginInfo');
 
-    //CREATE EVENT
+    //EVENT
     /////////////////////////////////////
     /////////////////////////////////////
 
@@ -29,6 +30,9 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
     };
 
     $scope.event = {
+        loaded: false,
+        data: null,
+        image: null,
         title: "",
         date: "",
         time: "",
@@ -38,6 +42,26 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
         keywords: [],
         salary: null,
         invalidProperties: [],
+        formatDate: function(){
+            if(this.data != null)
+                return moment(this.data.Date).format("DD MMM YYYY");
+        },
+        getDetails: function(id){
+            var request = config.eventByID.replace(':id', id);
+            //$http.get(request).then.call(this, this.processResponse.bind(this));
+            $http.get(request).success(function(response){
+                if(response.Status.Is_valid === 'true'){
+                    var event = response.Data;
+                    $scope.event.image = config.eventImageURL.replace('$uid', event.Manager).replace('$eid', event._id) + event.Image;
+                    $scope.event.data = event;
+                    $scope.event.loaded = true;
+                    console.log($scope.event.data);
+                } else {
+                    $scope.event.loaded = false;
+                    $scope.redirect('/');
+                }
+            })
+        },
         markAsFavorite: function(event){
             $http.get(config.eventsFavorite.replace("$eid", event._id)).success(function(response){
                 event.Favorited = !event.Favorited;
@@ -119,6 +143,9 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
                         $scope.events.data = response.Data.Events;
                     else
                         $scope.events.processData(response.Data.Events);
+                } else {
+                    $scope.events.data = [];
+                    $scope.events.total = 0;
                 }
             });
         },
@@ -136,9 +163,11 @@ app.controller('EventsController', function ($scope, $http, dialog, config, loca
     };
 
     function makeRequestByView(){
-        switch ($location.url()){
-            case '/events':
+        switch ($location.url().split('/')[1]){
+            case 'events':
                 return $scope.events.getData();
+            case 'event':
+                return $scope.event.getDetails($routeParams.id)
         }
     }
     makeRequestByView();
