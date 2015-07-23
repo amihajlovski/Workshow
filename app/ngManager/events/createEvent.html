@@ -72,7 +72,16 @@
             <input type="number" class="search-events eventInputOutline nobold
             {{event.invalidProperties.indexOf('salary')==-1?'':'inputInvalid'}}"
                    placeholder="Enter salary for the artist..."
-                   ng-model="event.salary"/>
+                   ng-model="event.salary"
+                   style="width: 315px;"/>
+            <select
+                    placeholder="and time..."
+                    ng-model="event.artistType"
+                    class="search-events eventInputOutline nobold
+                    {{event.invalidProperties.indexOf('time')==-1?'':'inputInvalid'}}"
+                    style="width: 10%;">
+                <option ng-repeat="artist in event.generateArtistsTypes()">{{artist}}</option>
+            </select>
         </p>
     </div>
     <div class="row">

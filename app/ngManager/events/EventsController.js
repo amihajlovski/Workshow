@@ -30,9 +30,11 @@ app.controller('EventsController',
     };
 
     $scope.event = {
+        typesOfArtists: ["Photographer", "Graffiti artist", "Dancer", "Dj", "Comedian", "Singer", "Magician", "Circus performer", "Tattoo artist"],
         loaded: false,
         data: null,
         image: null,
+        artistType: "",
         title: "",
         date: "",
         time: "",
@@ -42,6 +44,9 @@ app.controller('EventsController',
         keywords: [],
         salary: null,
         invalidProperties: [],
+        generateArtistsTypes: function(){
+            return this.typesOfArtists.sort();
+        },
         formatDate: function(){
             if(this.data != null)
                 return moment(this.data.Date).format("DD MMM YYYY");
@@ -55,12 +60,17 @@ app.controller('EventsController',
                     $scope.event.image = config.eventImageURL.replace('$uid', event.Manager).replace('$eid', event._id) + event.Image;
                     $scope.event.data = event;
                     $scope.event.loaded = true;
-                    console.log($scope.event.data);
+                    $scope.event.increaseViewCount(event._id);
                 } else {
                     $scope.event.loaded = false;
                     $scope.redirect('/');
                 }
             })
+        },
+        increaseViewCount: function(id){
+            var request = config.increaseViewCount.replace(':id', id);
+            $http.get(request).success(function(response){
+            });
         },
         markAsFavorite: function(event){
             $http.get(config.eventsFavorite.replace("$eid", event._id)).success(function(response){
@@ -79,7 +89,7 @@ app.controller('EventsController',
         },
         validate: function(){
             this.invalidProperties = [];
-            var properties = ['title', 'date', 'time', 'image', 'description', 'location', 'keywords', 'salary'];
+            var properties = ['title', 'date', 'time', 'image', 'description', 'location', 'keywords', 'salary', 'artistType'];
             for(var i= 0,prop;prop=properties[i];i++){
                 if($scope.event[prop]=='' || $scope.event[prop]==null || $scope.event[prop] == [])
                     this.invalidProperties.push(prop);
@@ -101,7 +111,8 @@ app.controller('EventsController',
                 Description: this.description,
                 Location: this.location,
                 Keywords: this.splitKeywordTags(),
-                Salary: this.salary
+                Salary: this.salary,
+                Artist_type: this.artistType
             }
         },
         save: function(){
@@ -113,7 +124,7 @@ app.controller('EventsController',
                 $http.post(config.event, this.generateRequestDocument()).success(function(response){
                     moveUpload({'Name': $scope.event.image.name, 'type': 'eventCover', 'eventID': response.Data.eventID});
                     toaster.pop("success", "You've just created your event.");
-                    $scope.redirect('/');
+                    $scope.redirect('/event/' + response.Data.eventID);
                 });
             }
         }

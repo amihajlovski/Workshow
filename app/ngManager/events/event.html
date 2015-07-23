@@ -1,4 +1,36 @@
 <div class="container containerMarginTop" style="background-color: whitesmoke;">
+    <div class="eventDetailsRight">
+        <div class="row" ng-if="event.data.Artist_type">
+            <div class="col-md-12">
+                <p class="description">
+                    <span style="float: left;">Looking for: </span>
+                    <span style="float: right;color: #00A877;">{{event.data.Artist_type}}</span>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="description">
+                    <span style="float: left;">price for chosen artist: </span>
+                    <span class="glyphicon glyphicon-eur" style="float: right;margin-top: 4px;color: #00A877;"></span>
+                    <span style="float: right;color: #00A877;">{{event.data.Salary}}</span>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="description">
+                    <span style="float: left;">state: </span>
+                    <span style="float: right;color: {{event.data.State === 'active' ? '#00A877' : '#FF6700'}};">{{event.data.State}}</span>
+                </p>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-12">
+                <md-button class="loginButton md-raised">apply as artist</md-button>
+            </div>
+        </div>
+    </div>
     <div class="eventDetails">
         <div class="row">
             <div class="col-md-12">
@@ -24,3 +56,4 @@
         </div>
     </div>
 </div>
+

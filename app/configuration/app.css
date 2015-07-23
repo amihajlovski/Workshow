@@ -527,6 +527,7 @@ p {
     margin-top: 20px;
     background: white;
     padding: 10px;
+    float: left;
 }
 .eventDetails img {
     width: 100%;
@@ -550,4 +551,12 @@ p {
 }
 .eventDetails p.borderBottom {
     border-bottom: 1px solid #e7e7e7;
+}
+.eventDetailsRight {
+    border: 1px solid #e7e7e7;
+    width: 35%;
+    margin-top: 20px;
+    background: white;
+    padding: 10px;
+    float: right;
 }
