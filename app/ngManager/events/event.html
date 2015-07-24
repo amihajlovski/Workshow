@@ -25,9 +25,9 @@
                 </p>
             </div>
         </div>
-        <div class="row" style="margin-top: 20px;">
+        <div class="row" style="margin-top: 20px;" ng-if="user && user.Artist">
             <div class="col-md-12">
-                <md-button class="loginButton md-raised">apply as artist</md-button>
+                <md-button class="loginButton md-raised" ng-click="event.applyForEvent()">apply as artist</md-button>
             </div>
         </div>
     </div>

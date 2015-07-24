@@ -17,7 +17,7 @@
             <p class="eventCategories {{events.filter == 1 ? 'eventSelected' : ''}}" ng-click="events.filter=1;events.getData();">Your</p>
         </div>
         <div class="col-md-1">
-            <p class="eventCategories {{events.filter == 2 ? 'eventSelected' : ''}}" ng-click="events.filter=2;">Popular</p>
+            <p class="eventCategories {{events.filter == 2 ? 'eventSelected' : ''}}" ng-click="events.filter=2;events.getData();">Popular</p>
         </div>
         <div class="col-md-1">
             <input ng-model="events.keyword" class="eventSearchByKeyword" placeholder="Show by keyword" ng-enter="events.filter=3;events.getData()"/>

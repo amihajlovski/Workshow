@@ -7,6 +7,7 @@
             <p class="type">{{user.info.Artist == true ? 'Artist' : 'Manager'}}</p>
             <p class="name">{{user.info.Name + ' ' + user.info.Surname}}</p>
             <p>{{user.info.Email}}</p>
+            <p ng-if="user.info.Artist==true">{{user.skills.join(', ')}}</p>
             <p ng-if="user.events.loaded && user.info.Manager==true">{{user.events.total}} events</p>
             <md-button ng-if="loggedUser && loggedUser.User_id==user.info._id" class="createEvent"
                        ng-click="redirectTo('/user/' + user.info._id + '/edit')">edit profile</md-button>

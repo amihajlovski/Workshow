@@ -44,6 +44,22 @@ app.controller('EventsController',
         keywords: [],
         salary: null,
         invalidProperties: [],
+        applyForEvent: function(){
+            if(!$scope.user.Artist){
+                toaster.pop('error', 'This feature is allowed only for artists.');
+                return;
+            }
+            var eventID = this.data._id;
+            var artistID = $scope.user.User_id;
+            var request = config.applyAsArtist.replace(':artistID', artistID).replace(':eventID', eventID);
+            $http.get(request).success(function(response){
+                if(response.Status.Is_valid==='false'){
+                    toaster.pop('error', 'You have already aplied for this event.');
+                } else {
+                    toaster.pop('success', 'You have aplied for performing on this event. Wait for response.')
+                }
+            });
+        },
         generateArtistsTypes: function(){
             return this.typesOfArtists.sort();
         },

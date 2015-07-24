@@ -15,6 +15,7 @@ app.controller('ProfileController', function ($scope, $http, $routeParams, $loca
         avatar: config.avatarURL.replace("$id", $routeParams.id) + "?n=" + Math.random(),
         info: null,
         loaded: false,
+        skills: [],
         events: {
             filter: 1,
             loaded: false,
@@ -46,11 +47,18 @@ app.controller('ProfileController', function ($scope, $http, $routeParams, $loca
                 return moment(date).format("DD MMMM YYYY - HH:mm");
             }
         },
+        generateSkills: function(){
+            for (var i = 0, item; item = this.info.Skills[i]; i++) {
+                this.skills.push(item.text)
+            }
+        },
         getInfo: function(){
             $http.get(config.userByID.replace(":id", this.ID)).success(function(response){
                 if(response.Status.Is_valid == 'true'){
                     $scope.user.info = response.Data[0];
                     $scope.user.loaded = true;
+                    if($scope.user.info!=null && $scope.user.info.hasOwnProperty('Skills'))
+                        $scope.user.generateSkills();
                     $scope.user.events.getData();
                 } else
                     $location.path('/');
