@@ -33,6 +33,7 @@ app.controller('EventsController',
         typesOfArtists: ["Photographer", "Graffiti artist", "Dancer", "Dj", "Comedian", "Singer", "Magician", "Circus performer", "Tattoo artist"],
         loaded: false,
         data: null,
+        aplicants: [],
         image: null,
         artistType: "",
         title: "",
@@ -44,6 +45,9 @@ app.controller('EventsController',
         keywords: [],
         salary: null,
         invalidProperties: [],
+        formatUserAvatar: function(id){
+            return config.avatarURL.replace("$id", id);
+        },
         applyForEvent: function(){
             if(!$scope.user.Artist){
                 toaster.pop('error', 'This feature is allowed only for artists.');
@@ -56,7 +60,8 @@ app.controller('EventsController',
                 if(response.Status.Is_valid==='false'){
                     toaster.pop('error', 'You have already aplied for this event.');
                 } else {
-                    toaster.pop('success', 'You have aplied for performing on this event. Wait for response.')
+                    toaster.pop('success', 'You have aplied for performing on this event. Wait for response.');
+                    $scope.event.getDetails($routeParams.id);
                 }
             });
         },
@@ -77,11 +82,26 @@ app.controller('EventsController',
                     $scope.event.data = event;
                     $scope.event.loaded = true;
                     $scope.event.increaseViewCount(event._id);
+                    $scope.event.getAplicantsInfo(event);
                 } else {
                     $scope.event.loaded = false;
                     $scope.redirect('/');
                 }
             })
+        },
+        getAplicantsInfo: function(event){
+            if(event.hasOwnProperty('Aplicants') && event.Aplicants.length > 0){
+                var aplicants = [];
+                for(var i = 0, item; item = event.Aplicants[i]; i++){
+                    aplicants.push(item.ArtistID);
+                }
+                var request = config.userByID.replace(':id', aplicants.join(','));
+                $http.get(request).success(function(response){
+                    if(response.Status.Is_valid === 'true'){
+                        $scope.event.aplicants = response.Data;
+                    }
+                });
+            }
         },
         increaseViewCount: function(id){
             var request = config.increaseViewCount.replace(':id', id);

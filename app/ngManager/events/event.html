@@ -30,6 +30,19 @@
                 <md-button class="loginButton md-raised" ng-click="event.applyForEvent()">apply as artist</md-button>
             </div>
         </div>
+        <hr ng-if="event.aplicants.length > 0"/>
+        <div class="row" ng-if="event.aplicants.length > 0">
+            <div class="col-md-12">
+                <p>Candidates for artsts</p>
+            </div>
+        </div>
+        <div class="row" ng-if="event.aplicants.length > 0" ng-repeat="aplicant in event.aplicants">
+            <div class="col-md-12 aplicant">
+                <md-button class="createEvent choose" ng-if="user && user.User_id == event.data.Manager">choose</md-button>
+                <img ng-src="{{event.formatUserAvatar(aplicant._id)}}" class="avatar" />
+                <p ng-click="redirect('/user/' + aplicant._id)">{{aplicant.Name + ' ' + aplicant.Surname}}</p>
+            </div>
+        </div>
     </div>
     <div class="eventDetails">
         <div class="row">

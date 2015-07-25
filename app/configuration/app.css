@@ -560,3 +560,18 @@ p {
     padding: 10px;
     float: right;
 }
+.aplicant p {
+    padding-top: 12px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    width: 150px;
+    float: left;
+    cursor: pointer;
+}
+.aplicant p:focus {
+    outline: none;
+}
+.aplicant .choose{
+    float: right;
+    margin-right: 5px;
+}
