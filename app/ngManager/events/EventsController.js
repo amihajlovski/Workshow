@@ -48,6 +48,17 @@ app.controller('EventsController',
         formatUserAvatar: function(id){
             return config.avatarURL.replace("$id", id);
         },
+        chooseArtist: function(artistID){
+            var request = {
+                url: config.chooseArtist,
+                body: {Artist_id: artistID, Event_id: $routeParams.id}
+            };
+            $http.post(request.url, request.body).success(function(response){
+                if(response.Status.Is_valid == 'true'){
+                    $scope.event.getDetails($routeParams.id);
+                }
+            })
+        },
         applyForEvent: function(){
             if(!$scope.user.Artist){
                 toaster.pop('error', 'This feature is allowed only for artists.');
@@ -90,18 +101,22 @@ app.controller('EventsController',
             })
         },
         getAplicantsInfo: function(event){
+            var request = "";
+            if(event.hasOwnProperty('Artist')){
+                request = config.userByID.replace(':id', event.Artist.ArtistID);
+            } else
             if(event.hasOwnProperty('Aplicants') && event.Aplicants.length > 0){
                 var aplicants = [];
                 for(var i = 0, item; item = event.Aplicants[i]; i++){
                     aplicants.push(item.ArtistID);
                 }
-                var request = config.userByID.replace(':id', aplicants.join(','));
-                $http.get(request).success(function(response){
-                    if(response.Status.Is_valid === 'true'){
-                        $scope.event.aplicants = response.Data;
-                    }
-                });
+                request = config.userByID.replace(':id', aplicants.join(','));
             }
+            $http.get(request).success(function(response){
+                if(response.Status.Is_valid === 'true'){
+                    $scope.event.aplicants = response.Data;
+                }
+            });
         },
         increaseViewCount: function(id){
             var request = config.increaseViewCount.replace(':id', id);

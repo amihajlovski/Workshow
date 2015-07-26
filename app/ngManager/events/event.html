@@ -25,20 +25,36 @@
                 </p>
             </div>
         </div>
-        <div class="row" style="margin-top: 20px;" ng-if="user && user.Artist">
+        <div class="row" style="margin-top: 20px;" ng-if="user && user.Artist && !event.data.Artist">
             <div class="col-md-12">
                 <md-button class="loginButton md-raised" ng-click="event.applyForEvent()">apply as artist</md-button>
             </div>
         </div>
-        <hr ng-if="event.aplicants.length > 0"/>
-        <div class="row" ng-if="event.aplicants.length > 0">
+        <hr/>
+        <div class="row" ng-if="event.aplicants.length > 0 && event.data.Artist">
+            <div class="col-md-12 chosenArtist">
+                <p class="title">Chosen artist for this event</p>
+            </div>
+        </div>
+        <div class="row chosenArtist" ng-if="event.aplicants.length > 0 && event.data.Artist">
+            <div class="col-md-4">
+                <img ng-click="redirect('/user/' + event.aplicants[0]._id)" ng-src="{{event.formatUserAvatar(event.aplicants[0]._id)}}" class="userProfileAvatarOverride"/>
+            </div>
+            <div class="col-md-8">
+                <p class="name" ng-click="redirect('/user/' + event.aplicants[0]._id)">{{event.aplicants[0].Name + ' ' + event.aplicants[0].Surname}}</p>
+                <a href="mailto:{{event.aplicants[0].Email}}" class="email">{{event.aplicants[0].Email}}</a>
+                <p class="about" ng-if="event.aplicants[0].About">{{event.aplicants[0].About}}</p>
+            </div>
+        </div>
+        <div class="row" ng-if="event.aplicants.length > 0 && !event.data.Artist">
             <div class="col-md-12">
                 <p>Candidates for artsts</p>
             </div>
         </div>
-        <div class="row" ng-if="event.aplicants.length > 0" ng-repeat="aplicant in event.aplicants">
+        <div class="row" ng-if="event.aplicants.length > 0 && !event.data.Artist" ng-repeat="aplicant in event.aplicants">
             <div class="col-md-12 aplicant">
-                <md-button class="createEvent choose" ng-if="user && user.User_id == event.data.Manager">choose</md-button>
+                <md-button class="createEvent choose" ng-if="user && user.User_id == event.data.Manager"
+                           ng-click="event.chooseArtist(aplicant._id)">choose</md-button>
                 <img ng-src="{{event.formatUserAvatar(aplicant._id)}}" class="avatar" />
                 <p ng-click="redirect('/user/' + aplicant._id)">{{aplicant.Name + ' ' + aplicant.Surname}}</p>
             </div>
