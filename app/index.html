@@ -54,7 +54,9 @@
                 <li>
                     <md-button class="createEvent" ng-click="redirectTo('/events')">events</md-button>
                     <img ng-src="{{avatar}}" class="avatar" ng-click="toggleDropDownMenu()"/>
-                    <span class="userInfo" ng-click="toggleDropDownMenu()">{{loggedUser.Name}}</span>
+                    <span class="userInfo" ng-click="toggleDropDownMenu()">
+                        {{loggedUser.Name}}
+                    </span>
                 </li>
                 <li>
                     <span class="glyphicon glyphicon-triangle-bottom" style="top: 18px;cursor: pointer;outline: none;" ng-click="toggleDropDownMenu()"></span>
@@ -62,6 +64,7 @@
             </ul>
             <div ng-show="loggedUser!=null && showDropdownMenu">
                 <ul class="logoutMenu">
+                    <li>Messages</li>
                     <li ng-click="redirectTo('/user/' + loggedUser.User_id)">Profile</li>
                     <li class="noBottomBorder" ng-click="logout()">Logout</li>
                 </ul>

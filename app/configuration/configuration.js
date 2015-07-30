@@ -38,5 +38,6 @@ configuration.constant('config', {
     "eventByID": apiURL + "event/:id",                                                                         // [GET]
     "increaseViewCount": apiURL + 'events/:id/viewcount',                                                      // [GET]
     "applyAsArtist": apiURL + 'artist/:artistID/event/:eventID/apply',                                         // [GET]
-    "chooseArtist": apiURL + 'manager/chooseartist'                                                            // [POST]
+    "chooseArtist": apiURL + 'manager/chooseartist',                                                           // [POST]
+    "newMessage": apiURL + 'messages/new'                                                                      // [POST]
 });

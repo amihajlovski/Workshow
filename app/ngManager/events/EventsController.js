@@ -56,8 +56,25 @@ app.controller('EventsController',
             $http.post(request.url, request.body).success(function(response){
                 if(response.Status.Is_valid == 'true'){
                     $scope.event.getDetails($routeParams.id);
+                    $scope.event.sendNotificationForArtist(artistID, $scope.event.data.Title);
                 }
             })
+        },
+        sendNotificationForArtist: function(artistID, eventName){
+            var request = new Object();
+            request.url = config.newMessage;
+            request.body = {
+                Sender_id: $scope.user.User_id,
+                Receiver_id: artistID,
+                Type: "notification",
+                Subject: "You are chosen for the event '" + eventName + "'",
+                Text: "Thanks for applying for the event '" +  eventName + "'. " + "You are chosen as artist. Good luck!",
+                Event_name: eventName,
+                Event_id: $routeParams.id
+            };
+            $http.post(request.url, request.body).success(function(response){
+                console.log(response);
+            });
         },
         applyForEvent: function(){
             if(!$scope.user.Artist){
