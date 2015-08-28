@@ -46,6 +46,17 @@
                 <p class="about" ng-if="event.aplicants[0].About">{{event.aplicants[0].About}}</p>
             </div>
         </div>
+        <hr ng-if="event.data.State === 'finished'"/>
+        <div class="row" ng-if="event.data.State === 'finished'">
+            <div class="col-md-12">
+                <p style="text-align: center;font-weight: bold;">Pay entry fee to confirm the event</p>
+            </div>
+        </div>
+        <div class="row" ng-if="event.data.State === 'finished'">
+            <div class="col-md-12">
+                <img src="../app/content/images/creditCards.jpg" style="width: 100%;" />
+            </div>
+        </div>
         <div class="row" ng-if="event.aplicants.length > 0 && !event.data.Artist">
             <div class="col-md-12">
                 <p>Candidates for artsts</p>
@@ -54,7 +65,7 @@
         <div class="row" ng-if="event.aplicants.length > 0 && !event.data.Artist" ng-repeat="aplicant in event.aplicants">
             <div class="col-md-12 aplicant">
                 <md-button class="createEvent choose" ng-if="user && user.User_id == event.data.Manager"
-                           ng-click="event.chooseArtist(aplicant._id)">choose</md-button>
+                           ng-click="event.chooseArtist(aplicant._id, aplicant.Name + ' ' + aplicant.Surname)">choose</md-button>
                 <img ng-src="{{event.formatUserAvatar(aplicant._id)}}" class="avatar" />
                 <p ng-click="redirect('/user/' + aplicant._id)">{{aplicant.Name + ' ' + aplicant.Surname}}</p>
             </div>

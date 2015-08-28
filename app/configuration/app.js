@@ -84,6 +84,16 @@ app.config(['$routeProvider', '$httpProvider', 'GooglePlusProvider', 'config',
             },
             access: {loginNeeded: false, allowedUserRoles: 'all'}
         }).
+        when('/messages', {
+            templateUrl: 'ngCommon/messages/messages.html',
+            controller: 'MessagesController',
+            resolve: {
+                loadController: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load('ngCommon/messages/messagesController.js');
+                }]
+            },
+            access: {loginNeeded: true, allowedUserRoles: 'all'}
+        }).
         when('/user/:id/edit', {
             templateUrl: 'ngCommon/profile/addInfo.html',
             controller: 'ProfileController',

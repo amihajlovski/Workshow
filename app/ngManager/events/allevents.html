@@ -11,16 +11,16 @@
     </div>
     <div class="row containerMarginTop">
         <div class="col-md-1 col-md-offset-4">
-            <p class="eventCategories {{events.filter == 0 ? 'eventSelected' : ''}}" ng-click="events.filter=0;events.getData();">Active</p>
+            <p class="eventCategories {{events.filter == 0 ? 'eventSelected' : ''}}" ng-click="events.filter=0;events.getData(true);">Active</p>
         </div>
         <div class="col-md-1" ng-if="user.Manager">
-            <p class="eventCategories {{events.filter == 1 ? 'eventSelected' : ''}}" ng-click="events.filter=1;events.getData();">Your</p>
+            <p class="eventCategories {{events.filter == 1 ? 'eventSelected' : ''}}" ng-click="events.filter=1;events.getData(true);">Your</p>
         </div>
         <div class="col-md-1">
-            <p class="eventCategories {{events.filter == 2 ? 'eventSelected' : ''}}" ng-click="events.filter=2;events.getData();">Popular</p>
+            <p class="eventCategories {{events.filter == 2 ? 'eventSelected' : ''}}" ng-click="events.filter=2;events.getData(true);">Popular</p>
         </div>
         <div class="col-md-1">
-            <input ng-model="events.keyword" class="eventSearchByKeyword" placeholder="Show by keyword" ng-enter="events.filter=3;events.getData()"/>
+            <input ng-model="events.keyword" class="eventSearchByKeyword" placeholder="Show by keyword" ng-enter="events.filter=3;events.getData(true)"/>
         </div>
     </div>
     <div class="row">
@@ -45,10 +45,10 @@
             <p class="stock-title">No events found</p>
         </div>
     </div>
-    <div class="row" ng-if="events.total > events.limit">
+    <div class="row" ng-if="events.data.length > 0 && events.total > events.offset">
         <div class="col-md-12 showMorePadding">
             <center><md-button class="startManagingButton"
-                               ng-click="events.offset=events.offset+events.limit;events.getData()">show more</md-button></center>
+                               ng-click="events.getData(false)">show more</md-button></center>
         </div>
     </div>
 </div>

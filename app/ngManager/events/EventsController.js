@@ -48,7 +48,7 @@ app.controller('EventsController',
         formatUserAvatar: function(id){
             return config.avatarURL.replace("$id", id);
         },
-        chooseArtist: function(artistID){
+        chooseArtist: function(artistID, artistName){
             var request = {
                 url: config.chooseArtist,
                 body: {Artist_id: artistID, Event_id: $routeParams.id}
@@ -57,6 +57,7 @@ app.controller('EventsController',
                 if(response.Status.Is_valid == 'true'){
                     $scope.event.getDetails($routeParams.id);
                     $scope.event.sendNotificationForArtist(artistID, $scope.event.data.Title);
+                    $scope.event.sendRatingMessageForManager(artistID, artistName)
                 }
             })
         },
@@ -64,11 +65,28 @@ app.controller('EventsController',
             var request = new Object();
             request.url = config.newMessage;
             request.body = {
-                Sender_id: $scope.user.User_id,
                 Receiver_id: artistID,
                 Type: "notification",
                 Subject: "You are chosen for the event '" + eventName + "'",
                 Text: "Thanks for applying for the event '" +  eventName + "'. " + "You are chosen as artist. Good luck!",
+                Event_name: eventName,
+                Event_id: $routeParams.id
+            };
+            $http.post(request.url, request.body).success(function(response){
+                console.log('sending message', response);
+            });
+        },
+        sendRatingMessageForManager: function(artistID, artistName){
+            var eventName = this.data.Title;
+            var request = new Object();
+            request.url = config.newMessage;
+            request.body = {
+                Artist_id: artistID,
+                Artist_name: artistName,
+                Receiver_id: this.data.Manager,
+                Type: "rating",
+                Subject: "Rate artist for the event '" + eventName + "'",
+                Text: "Please rate the artist you have chosen to perform for the show '" +  eventName + "'. ",
                 Event_name: eventName,
                 Event_id: $routeParams.id
             };
@@ -209,19 +227,15 @@ app.controller('EventsController',
         count: 6,
         offset: 0,
         total: 0,
-        getData: function(){
-            var query = "?count=" + this.count + "&offset=" + this.offset + "&filter=" + this.filter;
-            if(this.filter==3)
-                query += "&keyword=" + this.keyword;
-            else
-                this.keyword = "";
+        getData: function(filterChanged){
+            this.data = filterChanged==true ? [] : this.data;
+            this.offset = filterChanged==true ? 0 : this.offset;
+            var query = "?count=" + this.count + "&offset=" + this.offset + "&filter=" + this.filter + "&keyword=" + this.keyword;
             $http.get(config.events + query).success(function(response){
                 if(response.Status.Is_valid === "true"){
                     $scope.events.total = response.Data.Total;
-                    if($scope.events.offset==0)
-                        $scope.events.data = response.Data.Events;
-                    else
-                        $scope.events.processData(response.Data.Events);
+                    $scope.events.processData(response.Data.Events);
+                    $scope.events.offset += $scope.events.count;
                 } else {
                     $scope.events.data = [];
                     $scope.events.total = 0;
