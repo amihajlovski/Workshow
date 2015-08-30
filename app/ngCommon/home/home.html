@@ -29,4 +29,34 @@
             </div>
         </div>
     </div>
+    <div class="row" ng-if="events.data.length>0">
+        <div class="col-md-12">
+            <p class="stock-title">popular <span style="color: #FF6700;">events</span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 containerMarginTop" ng-repeat="ev in events.data" ng-if="events.total>0">
+            <div class="event">
+                <img ng-src="{{events.formatEventImageURL(ev.Manager, ev._id, ev.Image)}}" ng-click="redirect('/event/' + ev._id)"/>
+                <p class="title" ng-click="redirect('/event/' + ev._id)">{{ev.Title}}</p>
+                <p class="by" ng-click="redirect('/user/' + ev.Manager_info._id)">by {{ev.Manager_info.Name + ' ' + ev.Manager_info.Surname}}</p>
+                <div class="details">
+                    <p class="glyphicon glyphicon-time" style="float: left;"></p>
+                    <span class="hint--top" data-hint="Date of the event">{{events.formatDateFormat(ev.Date)}}</span>
+                </div>
+                <div class="details">
+                    <p class="glyphicon glyphicon-eur" style="float: left;"></p>
+                    <span class="hint--top" data-hint="Salary for chosen artist">{{ev.Salary}}</span>
+                    <p ng-if="user.Logged" ng-click="events.markAsFavorite(ev)"
+                       class="favoriteThis {{ev.Favorited ? 'glyphicon glyphicon-heart' : 'glyphicon glyphicon-heart-empty'}}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="events.data.length > 0 && events.total > events.offset">
+        <div class="col-md-12 showMorePadding">
+            <center><md-button class="startManagingButton"
+                               ng-click="redirect('/events')">see all events</md-button></center>
+        </div>
+    </div>
 </div>

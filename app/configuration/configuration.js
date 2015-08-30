@@ -41,5 +41,7 @@ configuration.constant('config', {
     "chooseArtist": apiURL + 'manager/chooseartist',                                                           // [POST]
     "newMessage": apiURL + 'messages/new',                                                                     // [POST]
     "messages": apiURL + 'messages',                                                                           // [GET]
-    "messageByID": apiURL + 'messages/:id'
+    "messageByID": apiURL + 'messages/:id',
+    "rateArtist": apiURL + 'artist/:id/rate',
+    "markMessageStatus": apiURL + "messages/:id/changestatus"
 });

@@ -46,11 +46,58 @@
             <p class="title">{{msg.Subject}}</p>
         </div>
         <div class="col-md-2 messagePadding">
-            <p class="title">{{msg.Sent_at ? msg.Sent_at : "unknown"}}</p>
+            <p class="title">{{msg.Sent_at ? messages.formatDate(msg.Sent_at) : "unknown"}}</p>
         </div>
     </div>
 </div>
 
 <div class="container containerMarginTop" ng-if="messageView">
-
+    <div class="row containerMarginTop" style="margin-top: 100px !important;">
+        <div class="col-md-1 col-md-offset-3">
+            <p class="title orange">From: </p>
+        </div>
+        <div class="col-md-4">
+            <p class="title">{{messages.specificByID.From}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1 col-md-offset-3">
+            <p class="title orange">Subject: </p>
+        </div>
+        <div class="col-md-4">
+            <p class="title">{{messages.specificByID.Subject}}</p>
+        </div>
+    </div>
+    <div class="row containerMarginTop">
+        <div class="col-md-1 col-md-offset-3">
+            <p class="title orange">Message: </p>
+        </div>
+        <div class="col-md-4">
+            <p class="title">{{messages.specificByID.Text}}</p>
+        </div>
+    </div>
+    <div class="row containerMarginTop" ng-if="messages.specificByID.Type=='rating'">
+        <div class="col-md-9 col-md-offset-3">
+            <p class="title orange ratingTitleSize">
+                provide rating for artist <span class="black">{{messages.specificByID.Artist_name}}:</span>
+            </p>
+        </div>
+    </div>
+    <div class="row" ng-if="messages.specificByID.Type=='rating'">
+        <div class="col-md-7 col-md-offset-4">
+            <span class="glyphicon glyphicon-star starSize" ng-click="messages.setRating(1)"></span>
+            <span class="glyphicon glyphicon-star{{messages.rating >=2 ? '' : '-empty'}} starSize" ng-click="messages.setRating(2)"></span>
+            <span class="glyphicon glyphicon-star{{messages.rating >=3 ? '' : '-empty'}} starSize" ng-click="messages.setRating(3)"></span>
+            <span class="glyphicon glyphicon-star{{messages.rating >=4 ? '' : '-empty'}} starSize" ng-click="messages.setRating(4)"></span>
+            <span class="glyphicon glyphicon-star{{messages.rating >=5 ? '' : '-empty'}} starSize" ng-click="messages.setRating(5)"></span>
+        </div>
+    </div>
+    <div class="row">
+        <p class="stock-title">
+            <md-button class="startManagingButton saveBtnColor"
+                       ng-click="messages.rateArtist()"
+                       ng-if="messages.specificByID.Type=='rating' && !messages.specificByID.Rated">rate</md-button>
+            <md-button class="loginButton" ng-click="redirect('/messages')">go to messages</md-button>
+        </p>
+    </div>
 </div>

@@ -13,10 +13,44 @@ app.controller('MessagesController', function ($scope, $http, $routeParams, $loc
         count: 5,
         total: 0,
         offset: 0,
+        rating: 1,
+        specificByID: null,
+        formatDate : function(date){
+            return moment(date).format("DD MMM, YYYY");
+        },
+        setRating: function(value){
+            if(this.specificByID.Rated)
+                return;
+            this.rating = value;
+        },
+        rateArtist: function(){
+            var request = new Object();
+            request.url = config.rateArtist.replace(":id", this.specificByID.Artist_id);
+            request.body = {Message_id: this.specificByID._id, Rating: this.rating};
+            $http.post(request.url, request.body).success(function(response){
+                if(response.Status.Is_valid==='true')
+                    toaster.pop("success", "Artist rated!");
+                $location.path('/messages');
+            });
+        },
+        changeMessageStatus: function(msgID, status){
+            var request = new Object();
+            request.url = config.markMessageStatus.replace(":id", msgID);
+            request.body = {Read: status};
+            $http.post(request.url, request.body).success(function(response){
+                console.log(response);
+            });
+        },
         openSpecificMessage: function(){
             if($routeParams.id){
                 $http.get(config.messageByID.replace(":id", $routeParams.id)).success(function(response){
-
+                    if(response.Status.Is_valid === "true") {
+                        $scope.messages.specificByID = response.Data;
+                        $scope.messages.rating = response.Data.Rating ? response.Data.Rating : 1;
+                        $scope.messages.changeMessageStatus(response.Data._id, true);
+                    }
+                    else
+                        $location.path('/messages');
                 });
             }
         },

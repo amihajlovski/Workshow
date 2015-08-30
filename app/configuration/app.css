@@ -620,3 +620,20 @@ p {
 .refresh span{
     color: black;
 }
+.orange {
+    color: #FF6700;
+}
+.starSize {
+    font-size: 40px;
+    color: cadetblue;
+    cursor: pointer;
+}
+.starSize:focus{
+    outline: none;
+}
+.black{
+    color: black;
+}
+.ratingTitleSize {
+    font-size: 24px;
+}
