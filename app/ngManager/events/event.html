@@ -63,11 +63,28 @@
             </div>
         </div>
         <div class="row" ng-if="event.aplicants.length > 0 && !event.data.Artist" ng-repeat="aplicant in event.aplicants">
-            <div class="col-md-12 aplicant">
+            <div class="col-md-1 aplicant">
+                <img ng-src="{{event.formatUserAvatar(aplicant._id)}}" class="avatar imgAplicant" />
+            </div>
+            <div class="col-md-9 aplicant">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p ng-click="redirect('/user/' + aplicant._id)">{{aplicant.Name + ' ' + aplicant.Surname}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="margin-left: 10px; margin-top: 5px;">
+                        <span class="glyphicon glyphicon-star{{event.generateRatingStars(aplicant) > 0 ? '' : '-empty'}}"></span>
+                        <span class="glyphicon glyphicon-star{{event.generateRatingStars(aplicant) > 1 ? '' : '-empty'}}"></span>
+                        <span class="glyphicon glyphicon-star{{event.generateRatingStars(aplicant) > 2 ? '' : '-empty'}}"></span>
+                        <span class="glyphicon glyphicon-star{{event.generateRatingStars(aplicant) > 3 ? '' : '-empty'}}"></span>
+                        <span class="glyphicon glyphicon-star{{event.generateRatingStars(aplicant) > 4 ? '' : '-empty'}}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 aplicant" style="margin-top: 10px;">
                 <md-button class="createEvent choose" ng-if="user && user.User_id == event.data.Manager"
                            ng-click="event.chooseArtist(aplicant._id, aplicant.Name + ' ' + aplicant.Surname)">choose</md-button>
-                <img ng-src="{{event.formatUserAvatar(aplicant._id)}}" class="avatar" />
-                <p ng-click="redirect('/user/' + aplicant._id)">{{aplicant.Name + ' ' + aplicant.Surname}}</p>
             </div>
         </div>
     </div>

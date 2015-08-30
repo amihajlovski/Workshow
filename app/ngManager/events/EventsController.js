@@ -45,6 +45,7 @@ app.controller('EventsController',
         keywords: [],
         salary: null,
         invalidProperties: [],
+        rating: 0,
         formatUserAvatar: function(id){
             return config.avatarURL.replace("$id", id);
         },
@@ -132,6 +133,15 @@ app.controller('EventsController',
                     $scope.redirect('/');
                 }
             })
+        },
+        generateRatingStars: function(artist){
+            if(!artist.hasOwnProperty('Ratings'))
+                 return 0;
+            var sum = 0;
+            for(var i = 0, rating; rating = artist.Ratings[i]; i++)
+                sum += rating.Rating;
+            var result = Math.round(sum / artist.Ratings.length);
+            return result;
         },
         getAplicantsInfo: function(event){
             var request = "";

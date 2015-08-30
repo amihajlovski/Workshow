@@ -12,7 +12,8 @@ var app = angular.module('graduateApp', [
     'ngAnimate',
     'FileUpload',
     'ui.bootstrap',
-    'ngTagsInput'
+    'ngTagsInput',
+    'google.places'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', 'GooglePlusProvider', 'config',

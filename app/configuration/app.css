@@ -42,7 +42,7 @@ p {
 }
 
 .cover {
-    background-image: url("../content/images/cover.jpg");
+    background-image: url("../content/images/cover2.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -636,4 +636,9 @@ p {
 }
 .ratingTitleSize {
     font-size: 24px;
+}
+.imgAplicant {
+    height: 40px;
+    width: 40px;
+    margin-top: 15px;
 }
