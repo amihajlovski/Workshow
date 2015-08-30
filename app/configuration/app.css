@@ -597,3 +597,26 @@ p {
 .chosenArtist p.about {
     padding-top: 10px;
 }
+.message{
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+    background-color: white;
+    cursor: pointer;
+}
+.messagePadding {
+    padding-top: 5px;
+}
+.unread {
+    background-color: #ffedcc;
+}
+.refresh{
+    background-color: transparent;
+    border: 1px solid grey;
+}
+.refresh:hover{
+    background-color: lightgrey !important;
+    color:white !important;
+}
+.refresh span{
+    color: black;
+}

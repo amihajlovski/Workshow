@@ -64,7 +64,7 @@
             </ul>
             <div ng-show="loggedUser!=null && showDropdownMenu">
                 <ul class="logoutMenu">
-                    <li>Messages</li>
+                    <li ng-click="redirectTo('/messages')">Messages</li>
                     <li ng-click="redirectTo('/user/' + loggedUser.User_id)">Profile</li>
                     <li class="noBottomBorder" ng-click="logout()">Logout</li>
                 </ul>

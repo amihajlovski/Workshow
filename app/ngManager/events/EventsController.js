@@ -73,7 +73,6 @@ app.controller('EventsController',
                 Event_id: $routeParams.id
             };
             $http.post(request.url, request.body).success(function(response){
-                console.log('sending message', response);
             });
         },
         sendRatingMessageForManager: function(artistID, artistName){
@@ -91,7 +90,6 @@ app.controller('EventsController',
                 Event_id: $routeParams.id
             };
             $http.post(request.url, request.body).success(function(response){
-                console.log(response);
             });
         },
         applyForEvent: function(){
@@ -116,7 +114,7 @@ app.controller('EventsController',
         },
         formatDate: function(){
             if(this.data != null)
-                return moment(this.data.Date).format("DD MMM YYYY");
+                return moment(this.data.Date).format("DD MMM, YYYY @ HH:mm");
         },
         getDetails: function(id){
             var request = config.eventByID.replace(':id', id);

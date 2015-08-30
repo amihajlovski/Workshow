@@ -1,10 +1,56 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
 
-</body>
-</html>
+<div class="container containerMarginTop" ng-if="!messageView">
+    <div class="row containerMarginTop">
+        <div class="col-md-2">
+            <md-button class="createEvent">mark as read</md-button>
+        </div>
+        <div class="col-md-2 col-md-offset-8">
+            <md-button class="createEvent refresh" ng-click="messages.getData()"><span class="glyphicon glyphicon-refresh"></span></md-button>
+        </div>
+    </div>
+    <hr/>
+    <div class="row containerMarginTop" ng-if="messages.total==0">
+        <div class="col-md-12">
+            <p class="stock-title">no messages found</p>
+        </div>
+    </div>
+    <div class="row" ng-if="messages.total!=0">
+        <div class="col-md-1">
+            <p class="title">
+                <input type="checkbox"/>
+                <span>Select</span>
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p class="title">From</p>
+        </div>
+        <div class="col-md-2">
+            <p class="title">Subject</p>
+        </div>
+        <div class="col-md-offset-5 col-md-2">
+            <p class="title">Received</p>
+        </div>
+    </div>
+    <div class="row message"
+         ng-repeat="msg in messages.data"
+         ng-class="{'unread':msg.Read==false}"
+         ng-if="messages.total!=0"
+         ng-click="redirect('/messages/' + msg._id)">
+        <div class="col-md-1 messagePadding">
+            <input type="checkbox"/>
+        </div>
+        <div class="col-md-2 messagePadding">
+            <p class="title">{{msg.From ? msg.From : 'unknown'}}</p>
+        </div>
+        <div class="col-md-7 messagePadding">
+            <p class="title">{{msg.Subject}}</p>
+        </div>
+        <div class="col-md-2 messagePadding">
+            <p class="title">{{msg.Sent_at ? msg.Sent_at : "unknown"}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container containerMarginTop" ng-if="messageView">
+
+</div>

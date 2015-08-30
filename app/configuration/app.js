@@ -84,7 +84,7 @@ app.config(['$routeProvider', '$httpProvider', 'GooglePlusProvider', 'config',
             },
             access: {loginNeeded: false, allowedUserRoles: 'all'}
         }).
-        when('/messages', {
+        when('/messages/:id?', {
             templateUrl: 'ngCommon/messages/messages.html',
             controller: 'MessagesController',
             resolve: {
