@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <p>FIND AN EVENT IN YOUR CITY</p>
                 <input type="text" g-places-autocomplete ng-model="city" placeholder="Hey you party animal, what city are you looking for?" class="search-events">
-                <md-button class="startManagingButton forSearch">search events</md-button>
+                <md-button class="startManagingButton forSearch" ng-click="redirect('/events')">search events</md-button>
             </div>
         </div>
     </div>

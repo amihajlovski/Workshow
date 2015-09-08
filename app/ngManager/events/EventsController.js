@@ -203,7 +203,7 @@ app.controller('EventsController',
                 Date: moment(moment(this.date).add(parseInt(this.time.split(':')[0]), 'hours')).valueOf(),
                 Image: this.image.name,
                 Description: this.description,
-                Location: this.location,
+                Location: this.location.name,
                 Keywords: this.splitKeywordTags(),
                 Salary: this.salary,
                 Artist_type: this.artistType
